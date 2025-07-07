@@ -14,9 +14,15 @@ export default function Home() {
 
   const handleFetchAll = async () => {
     setLoading(true);
-    const data = await getAllUsers();
-    setUsers(data);
-    setLoading(false);
+
+    try{
+      const data = await getAllUsers();
+      setUsers(data);
+    }catch (error) {
+      alert("Erro ao buscar Usuários")
+    }finally{
+       setLoading(false);
+    }
   };
 
   const handleFetchById = async () => {

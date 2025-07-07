@@ -5,11 +5,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getAllUsers(): Promise<User[]> {
     const response = await fetch(`${API_URL}/users`);
     const data = await response.json();
-    return data || [];
+    return data.data;
 }
 
-export async function getUserById(id: string): Promise<User> {
-    const response = await fetch(`${API_URL}/users/:${id}`);
+export async function getUserById(name: string): Promise<User> {
+    const response = await fetch(`${API_URL}/users/:${name}`);
     return response.json();
 }
 
