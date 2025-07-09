@@ -6,7 +6,7 @@ type Props = {
 
 export default function UserList({ users }: Props) {
   if (!users || users.length === 0) {
-    return <p>Nenhum usuario encontrado!</p>
+    return <p className="text-red-500">Nenhum usuario encontrado!</p>
   }
   return (
     <ul className='grid md:grid-cols-2 gap-4'>

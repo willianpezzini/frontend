@@ -7,14 +7,14 @@ type Props = {
 export default function ButtonGroup({ onFetchAll, onFetchById, onCreateUser }: Props) {
     return (
         <div className="flex gap-4 mb-6 ">
-            <button className="bg-green-600 text-white px-4 py-2 rounded hover: cursor-pointer" onClick={onCreateUser}>
+            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-900" onClick={onCreateUser}>
                 Adicionar
             </button>
             <button className="bg-blue-500 text-white px-4 py-2 rounded hover: cursor-pointer" onClick={onFetchAll}>
                 Buscar Todos
             </button>
             <button className="bg-blue-500 text-white px-4 py-2 rounded hover: cursor-pointer" onClick={onFetchById}>
-                Buscar por Usuario
+                Buscar Usuario por Id
             </button>
         </div>
     )
