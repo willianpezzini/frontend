@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { User } from '../../types/User';
-import { getAllUsers, getUserById, createUser } from '../../services/userService';
+import { getAllUsers, getUserById,getUserByName, createUser } from '../../services/userService';
 import UserList from '../../components/UserList';
 import ButtonGroup from '../../components/ButtonGroup';
 import UserForm from '../../components/UserForm';
@@ -41,13 +41,33 @@ export default function Home() {
       console.log("Usuario encontrado: ", user)
       setUsers(user ? [user] : []);
     } catch (error) {
-      alert("Erroa ao buscar Usuário");
+      alert("Erro ao buscar Usuário");
       setUsers([]);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleFetchByName = async () => {
+    const name = prompt("Digite o Nome do usuário:");
+
+    if (!name) return;
+
+    setLoading(true);
+    setShowForm(false);
+
+    try {
+      const user = await getUserByName(name);
+      console.log("Usuario encontrado: ", user)
+      setUsers(user ? [user] : []);
+    } catch (error) {
+      alert("Erro ao buscar Usuário");
+      setUsers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   const handleCreateUser = async () => {
     setShowForm(true)
   };
@@ -66,15 +86,18 @@ export default function Home() {
     <div className='p-6 bg-gray-100 min-h-screen'>
       <h1 className='text-2xl text-center font-bold mb-5'>Usuários</h1>
 
-      <div className='flex flex-row items-center content-center justify-between bg-amber-200 align-bottom'>
+      <div className='flex flex-row items-center justify-center justify-items-center'>
         <ButtonGroup
           onCreateUser={handleCreateUser}
           onFetchAll={handleFetchAll}
           onFetchById={handleFetchById}
+          onFetchByName={handleFetchByName}
         />
       </div>
 
-      {showForm ? (
+      {loading ? (
+        <p>Carregando...</p>
+      ) : showForm ? (
         <UserForm onSubmit={handleSubmitForm} onCancel={() => setShowForm(false)} />
       ) : (
         <UserList users={users} />
