@@ -59,7 +59,7 @@ export default function Home() {
     try {
       const user = await getUserByName(name);
       console.log("Usuario encontrado: ", user)
-      setUsers(user ? [user] : []);
+      setUsers(user);
     } catch (error) {
       alert("Erro ao buscar Usuário");
       setUsers([]);
